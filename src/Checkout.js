@@ -68,7 +68,7 @@ function Checkout() {
               {filteredItem.map(item => (
                 <div style={{textAlign: 'center'}}>
                   <h3>{item.name}</h3>
-                  <img className="img-fluid d-block mx-auto" src={item.image} alt={item.name} />
+                  <img className="img-fluid" src={item.image} alt={item.name} />
                   <p>{item.description}</p>
                   <p>Price: {item.price}</p>
                 </div>
@@ -84,17 +84,17 @@ function Checkout() {
                   <label htmlFor="number">Phone number*</label>
                   <input type="text" required={true} onChange={(e) => handlePhone(e)}  className="form-control" id="number" placeholder="Enter your phone number" /><small>You'll get message about your product shipment</small>
                 </div>
-                <button type="submit" className="btn btn-dark w-100">Checkout</button>
+                <button type="submit" className="btn btn-dark">Checkout</button>
               </form>
             </div>
           </div>
         </div>: res && res.length > 0 ?
         <div className="row">
-          <div className="col-md-6 offset-md-3 card text-center product p-4 pt-5 border-0 h-100 rounded-0">
+          <div className="col-md-6 offset-md-3 card text-center product">
             <p>{res}</p>
           </div>
         </div>:
-        <div className="col-md-6 offset-md-3 card text-center product p-4 pt-5 border-0 h-100 rounded-0">
+        <div className="col-md-6 offset-md-3 card text-center product">
           <p>Something went wrong!!! </p>
         </div>
       }
