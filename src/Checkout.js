@@ -60,13 +60,13 @@ function Checkout() {
 
   return (
     <div className="container">
-      <Link to='/'><button type="button" className="btn btn-black">>>Back</button></Link>
+      <Link to='/'><button type="button" className="btn btn-black">Back</button></Link>
       { !showMessage ?
         <div>
           <div className="row">
             <div className="col-md-6">
-              {filteredItem.map(item => (
-                <div style={{textAlign: 'center'}}>
+              {filteredItem.map((item, i) => (
+                <div key={i} style={{textAlign: 'center'}}>
                   <h3>{item.name}</h3>
                   <img className="img-fluid" src={item.image} alt={item.name} />
                   <p>{item.description}</p>

@@ -9,8 +9,8 @@ function Home() {
     <div className="container">
       <h3 style={{textAlign: 'center', marginTop: '30px'}}>Online Shopping Site</h3>
       <div className="row">
-        { products.map(product => (
-        <div className="col-md-4 card-container">
+        { products.map((product, i) => (
+        <div key = {i} className="col-md-4 card-container">
           <div className="card text-center product">
             <img className="img-fluid d-block mx-auto" src={product.image} alt={product.name} />
             <div className="card-body">
