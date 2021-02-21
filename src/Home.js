@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from "react-router-dom";
 import Products from './data.json'
 
 function Home() {
-  const [products, setProducts] = useState(Products)
+  const products = Products
 
   return (
     <div className="container">

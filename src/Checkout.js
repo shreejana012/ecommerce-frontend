@@ -5,10 +5,10 @@ import Products from './data.json'
 import { useParams } from "react-router";
 
 function Checkout() {
-  const [products, setProducts] = useState(Products)
+  const products = Products
   const [showMessage, setShowMessage] = useState(false)
   const { id } = useParams()
-  const filteredItem = products.filter(s => (s.id == id))
+  const filteredItem = products.filter(s => s.id === Number(id))
   const [name, setName] = useState('')
   const [phoneNum, setPhoneNum] = useState('')
   const [res, setResponse] = useState('Loading')
