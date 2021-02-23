@@ -3,34 +3,37 @@
 
 name: Build and deploy Node.js app to Azure Web App - shrijana-frontend-app
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+on: push
+
+env:
+  AZURE_WEBAPP_NAME: shrijana-frontend-app   # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: 'build'      # set this to the path to your web app project, defaults to the repository root
+  NODE_VERSION: '10.x'                # set this to the node version to use
 
 jobs:
   build-and-deploy:
+    name: Build and Deploy
     runs-on: ubuntu-latest
-
+    environment: production
     steps:
-    - uses: actions/checkout@master
-
-    - name: Set up Node.js version
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ env.NODE_VERSION }}
       uses: actions/setup-node@v1
       with:
-        node-version: '14.x'
-
+        node-version: ${{ env.NODE_VERSION }}
     - name: npm install, build, and test
       run: |
+        # Build and test the project, then
+        # deploy to Azure Web App.
         npm install
         npm run build --if-present
         npm run test --if-present
-
-    - name: 'Deploy to Azure Web App'
+    - name: add process.json
+      run: |
+        echo '{ script: "serve", env: { PM2_SERVE_SPA: "true", PM2_SERVE_HOMEPAGE: "/index.html" } }' >> build/process.json
+    - name: 'Deploy to Azure WebApp'
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'shrijana-frontend-app'
-        slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_738c6ded5e1a483eb7999dc110f9d8d3 }}
-        package: .
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
