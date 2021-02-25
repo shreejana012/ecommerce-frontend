@@ -41,9 +41,8 @@ function Checkout() {
   const fetch_retry = async (url, options, n) => {
     try {
       const response = await fetch(url, options)
-      const body = await response.json()
-      setResponse(body.message)
-      console.log(body)
+      const body = await response.text()
+      setResponse(body)
       return true
     } catch(err) {
       if (n === 0) {
