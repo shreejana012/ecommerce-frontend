@@ -36,7 +36,7 @@ function Checkout() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ user_details: params })
     }
-    fetch_retry('https://shrijana-function-app.azurewebsites.net/api/HttpTrigger1', options, 5)
+    fetch_retry(`https://shrijana-function-app.azurewebsites.net/api/HttpTrigger1?code=${secrets.API_KEY}`, options, 5)
   }
 
   const fetch_retry = async (url, options, n) => {
