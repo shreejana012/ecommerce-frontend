@@ -33,10 +33,9 @@ function Checkout() {
     const options = {
       method: 'POST',
       retries: 5,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ user_details: params })
+      headers: { 'Content-Type': 'application/json' }
     }
-    fetch_retry('https://shrijana-function-app.azurewebsites.net/api/HttpTrigger1', options, 5)
+    fetch_retry(`https://shrijana-function-app.azurewebsites.net/api/HttpTrigger1/?name=${params.name}&number=${params.number}&product_name=${params.product_name}`, options, 5)
   }
 
   const fetch_retry = async (url, options, n) => {
@@ -44,6 +43,7 @@ function Checkout() {
       const response = await fetch(url, options)
       const body = await response.json()
       setResponse(body.message)
+      console.log(body)
       return true
     } catch(err) {
       if (n === 0) {
